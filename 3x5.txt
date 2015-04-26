@@ -181,8 +181,8 @@ xx
 !4
  x
 xx
+xx
 xxx
- x
  x
 !5
 xxx
