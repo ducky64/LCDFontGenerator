@@ -38,8 +38,8 @@ class CppGenerator(object):
     image = self.image_src.get_image(char)
     char_bytes = self.backend.image_to_bytes(image)
     
-    varname = varname_prefix + "_CHAR_" + char
-    out.append("const uint8_t %s[] = {" % (varname))
+    varname = varname_prefix + "_CHAR_" + str(ord(char))
+    out.append("const uint8_t %s[] = { // %s" % (varname, char))
     for byte_row in char_bytes:
       line = ""
       for byte in byte_row:

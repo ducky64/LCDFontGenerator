@@ -18,7 +18,7 @@ class VerticalBitArrayBackend(object):
           bit = 1
         else:
           bit = 0
-        curr_byte |= bit << (7 - y % 8)
+        curr_byte |= bit << (y % 8)
       col.append(curr_byte)
       out.append(col)
     return out
