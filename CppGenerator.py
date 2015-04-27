@@ -1,4 +1,3 @@
-from matplotlib.sphinxext.plot_directive import out_of_date
 class CppGenerator(object):
   def __init__(self, image_src, backend):
     self.image_src = image_src
