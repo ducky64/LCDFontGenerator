@@ -32,7 +32,6 @@ class PilTruetypeSource(object):
           right_crop = x
           break
           
-      print((left_crop, right_crop))
       image = image.crop((left_crop, 0, 
                           right_crop+1, self.height))
 
