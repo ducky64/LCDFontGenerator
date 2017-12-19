@@ -7,30 +7,44 @@ class CppGenerator(object):
     out = []
     widths = {}
     varnames = {}
+    ord_charset = [ord(char) for char in charset]
+    
+    out.append("#include <cstdint>")
+    out.append("#include <cstddef>")
+    out.append("")
+    
+    out.append("namespace %s {" % (varname_prefix))
     
     for char in charset:
       chardef, varname, width = self.generate_char(char, varname_prefix)
       out.extend(chardef)
       
-      widths[char] = width
-      varnames[char] = varname
+      widths[ord(char)] = width
+      varnames[ord(char)] = varname
       
     out.append("")
       
-    out.append("const uint8_t* %s_CHARS[] = {" % (varname_prefix))
-    for char in charset:
-      out.append(varnames[char] + ",")
+    out.append("const uint8_t* Chars[] = {")
+    for i in range(32, 127):
+      if i in ord_charset:
+        out.append("  %s,  // '%s' %s" % (varnames[i], chr(i), i))
+      else:
+        out.append("  NULL,  // '%s' %s" % (chr(i), i))
     out.append("};")
     
-    out.append("const uint8_t %s_WIDTHS[] = {" % (varname_prefix))
-    for char in charset:
-      out.append(str(widths[char]) + ",")
+    out.append("const uint8_t Widths[] = {")
+    for i in range(32, 127):
+      if i in ord_charset:
+        out.append("  %s, // '%s' %s" % (str(widths[i]), chr(i), i))
+      else:
+        out.append("  0, // '%s' %s" % (chr(i), i))
     out.append("};")
     
     
-    out.append("const uint8_t %s_WIDTH_MAX = %i;" % (varname_prefix,
-                                                     max(widths.values())))
-          
+    out.append("const uint8_t MaxWidth = %i;" % (max(widths.values())))
+    
+    out.append("}")
+    
     return out
 
   def generate_char(self, char, varname_prefix):
@@ -38,10 +52,10 @@ class CppGenerator(object):
     image = self.image_src.get_image(char)
     char_bytes = self.backend.image_to_bytes(image)
     
-    varname = varname_prefix + "_CHAR_" + str(ord(char))
+    varname = "Char" + str(ord(char))
     out.append("const uint8_t %s[] = { // %s" % (varname, char))
     for byte_row in char_bytes:
-      line = ""
+      line = "  "
       for byte in byte_row:
         line += "0x" + format(byte, '02x') + ","
       line += "  //"

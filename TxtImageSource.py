@@ -24,9 +24,14 @@ class TxtImageSource(object):
       else:
         current_x = 0
         for pix_char in line:
+        
           if pix_char == ' ':
+            assert current_x < width, "overwidth on '%s' %s" % (current_key, ord(current_key))
+            assert current_y < height, "overheight on '%s' %s" % (current_key, ord(current_key))
             current_pix[current_x, current_y] = 0
           elif pix_char == 'x':
+            assert current_x < width, "overwidth on '%s' %s" % (current_key, ord(current_key))
+            assert current_y < height, "overheight on '%s' %s" % (current_key, ord(current_key))
             current_pix[current_x, current_y] = 1
           elif pix_char == '\r' or pix_char == '\n':
             pass

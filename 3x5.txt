@@ -1,3 +1,9 @@
+! 
+
+
+
+
+
 !A
  x
 x x
@@ -37,7 +43,7 @@ x
 !G
  xx
 x 
-x x 
+x x
 x x
  xx
 !H
@@ -132,8 +138,8 @@ x x
  x
 !W
 x x
-xxx
-xxx
+x x
+x x
 xxx
 x x
 !X
