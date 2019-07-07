@@ -294,6 +294,30 @@ x   x
     x
 x   x
  xxx
+!+
+
+  x
+  x
+xxxxx
+  x
+  x
+
+!-
+
+
+
+xxxxx
+
+
+
+!.
+
+
+
+
+
+
+  x
 !:
   
   x

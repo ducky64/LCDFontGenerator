@@ -6,7 +6,7 @@ from VerticalBitArrayBackend import VerticalBitArrayBackend
 from CppGenerator import CppGenerator
 
 printable_ascii_set = """ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~"""
-reduced_char_set = """ ABCDEFGHIJKLMNOPQRSTUVWXYZ:;<=>?0123456789"""
+reduced_char_set = """ ABCDEFGHIJKLMNOPQRSTUVWXYZ+-.:;<=>?0123456789"""
 gen = CppGenerator(TxtImageSource("5x7.txt", 5, 7), VerticalBitArrayBackend())
 generated = gen.generate(reduced_char_set, "Font5x7Data")
 with open("Font5x7.cpp", 'w') as f:
